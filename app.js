@@ -31,7 +31,7 @@ app.use("/admin", adminRouter)
 app.use(sesionRouter)
 
 //Archivos estaticos
-app.use(express.static('public'));
+app.use(express.static('src/public'));
 
 // Corriendo el servidor
 app.listen(app.get('port'), () => {
