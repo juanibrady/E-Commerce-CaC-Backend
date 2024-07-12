@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lux Peri</title>
+    <link rel="stylesheet" href="/styles/admin.css">
+    <link rel="icon" href="/media/favicon.png" type="image/x-icon">
+
+    <style>
+        form{
+            color: white;
+            margin: 40px auto;
+            width: 400px;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center
+        }
+        label{
+            margin-top: 20px;
+        }
+        input{
+            width: 200px;
+            height: 25px;
+        }
+        select{
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="/media/banner.png" alt="banner">
+        <nav>
+            <a href="/admin" class="buttonNav button">Home</a>
+            <a href="/admin/products" class="buttonNav button">Productos</a>
+            <a href="/admin/compradores" class="buttonNav button">Compradores</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1></h1>
+        <form id="userForm">
+            <label for="correo">Cambia el e-mail</label>
+            <input type="email" id="correo" name="correo" placeholder="Indica el e-mail" required>
+            <br>
+    
+            <label for="nombre">Cambia el nombre</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Indica el nombre del usuario" required>
+            <br>
+    
+            <label for="usuario">Cambia el usuario</label>
+            <input type="text" id="usuario" name="usuario" placeholder="Indica el usuario" required>
+            <br>
+    
+            <label for="rol">Indica el rol del usuario</label>
+            <select name="rol" id="rol" required>
+                <option value="" disabled selected>Selecciona un rol</option>
+                <option value="usuario">Usuario</option>
+                <option value="admin">Admin</option>
+            </select>
+            <br>
+    
+            <input type="submit" value="Enviar">
+        </form>
+    </main>
+    <script src="../public/js/formVerifier.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", async function(event){
+            try {
+                const form = document.getElementById('userForm')
+                const query = window.location.search
+                const response = await fetch(`http://localhost:3000/api/usuarios/user${query}`)
+                if(!response.ok){
+                    console.log("error:", response.status, response.statusText)
+                }
+                const data = await response.json();
+
+                form.nombre.value = data.usuario[0].nombre
+                form.usuario.value = data.usuario[0].usuario
+                form.correo.value = data.usuario[0].correo   
+            }catch (error) {
+                console.log(error)
+            }
+        });
+
+        document.querySelector("form")
+        .addEventListener("submit", async function(event){
+            event.preventDefault()
+            const formData = new FormData(this)
+            const formObject = Object.fromEntries(formData.entries())
+            const query = window.location.search
+            try {
+                const response = await fetch(`/api/usuarios/user${query}`, {
+                    method: 'PUT',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(formObject)
+                });
+                window.location.pathname = "/admin/compradores"
+            } catch (error) {
+              console.log(error)
+            }
+        })
+    </script>
+</body>
+
+</html>
