@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         }
     });
 
-    await fetch('http://localhost:3000/api/productos?categoria=destacado') 
+    await fetch('https://e-commerce-cac-backend.onrender.com/api/productos?categoria=destacado') 
         .then(response => response.json())
         .then(data => {    
             const swiper = document.querySelector (".swiper-wrapper")

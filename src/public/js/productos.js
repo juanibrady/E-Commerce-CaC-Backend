@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', async function () {
 
-    await fetch('http://localhost:3000/api/productos/listar') 
+    await fetch('https://e-commerce-cac-backend.onrender.com/api/productos/listar') 
         .then(response => response.json())
         .then(data => {    
             const tablaProductos = document.querySelector("table")
@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             botton.addEventListener("click", async e =>{
                 const id = botton.id
                 try {
-                    const response = await fetch(`http://localhost:3000/api/productos/${id}`,{
+                    const response = await fetch(`https://e-commerce-cac-backend.onrender.com/api/productos/${id}`,{
                         method:"DELETE",
                         headers:{
                             'Content-Type': 'application/json',

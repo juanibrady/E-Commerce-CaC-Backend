@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         return productoElement;
     }
 
-    await fetch('http://localhost:3000/api/productos?categoria=combos') 
+    await fetch('https://e-commerce-cac-backend.onrender.com/api/productos?categoria=combos') 
         .then(response => response.json())
         .then(data => {    
             const columnas = document.querySelector (".columnas#combos > ul")
@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         })
     
 
-    await fetch('http://localhost:3000/api/productos?categoria=mouse') 
+    await fetch('https://e-commerce-cac-backend.onrender.com/api/productos?categoria=mouse') 
         .then(response => response.json())
         .then(data => {    
             const columnas = document.querySelector (".columnas#mouse > ul")
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.error('Error:', error)
         });
 
-    await fetch('http://localhost:3000/api/productos?categoria=teclado') 
+    await fetch('https://e-commerce-cac-backend.onrender.com/api/productos?categoria=teclado') 
     .then(response => response.json())
     .then(data => {    
         const columnas = document.querySelector (".columnas#teclado > ul")
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         console.error('Error:', error)
     });
 
-    await fetch('http://localhost:3000/api/productos?categoria=auriculares') 
+    await fetch('https://e-commerce-cac-backend.onrender.com/api/productos?categoria=auriculares') 
         .then(response => response.json())
         .then(data => {    
             const columnas = document.querySelector (".columnas#auriculares > ul")
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             console.error('Error:', error)
         });
 
-    await fetch('http://localhost:3000/api/productos?categoria=monitor') 
+    await fetch('https://e-commerce-cac-backend.onrender.com/api/productos?categoria=monitor') 
     .then(response => response.json())
     .then(data => {    
         const columnas = document.querySelector (".columnas#monitor > ul")
