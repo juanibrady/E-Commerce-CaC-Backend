@@ -40,7 +40,7 @@
     <script>
         const getdata = async()=>{
             try {
-                const response = await fetch("http://localhost:3000/userdata")
+                const response = await fetch("https://e-commerce-cac-backend.onrender.com/userdata")
                 const data = await response.json()
                 if(data.islogged){
                     window.location.pathname = "/index.html"
