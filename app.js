@@ -8,10 +8,10 @@ const app = express();
 
 //Importando rutas
 
-import usersRouter from "./routes/userRoutes.js";
-import productosRouter from "./routes/productos.js";
-import sesionRouter from "./routes/sesionRoutes.js";
-import adminRouter from "./routes/admin.js";
+import usersRouter from "./src/routes/userRoutes.js";
+import productosRouter from "./src/routes/productos.js";
+import sesionRouter from "./src/routes/sesionRoutes.js";
+import adminRouter from "./src/routes/admin.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -31,7 +31,7 @@ app.use("/admin", adminRouter)
 app.use(sesionRouter)
 
 //Archivos estaticos
-app.use(express.static(path.resolve(__dirname,'./public')));
+app.use(express.static(path.resolve(__dirname,'./src/public')));
 
 // Corriendo el servidor
 app.listen(app.get('port'), () => {
