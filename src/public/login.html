@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury</title>
+    <script src="https://kit.fontawesome.com/eee5ba225a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/styles/styles.css">
+    <link rel="icon" href="favicon.png" type="image/x-icon">
+</head>
+
+<body>
+    <H1>Hola Bienvenido a LuxPeri</H1>
+    <section>
+        <h2>Logueate</h2>
+        <form method="post" action="/login" enctype="application/x-www-form-urlencoded" class="formContact">
+            <p id="responseMessage"></p>
+
+            <div>
+                <label for="email">Email</label>
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            
+            <input type="email" name="email" id="email" placeholder="Escribe tu email" required>
+
+            <div>
+                <label for="contraseña">Contraseña</label>
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <input type="password" name="password"contraseña" placeholder="Escribe tu contraseña" required>
+            
+            <input type="submit" value="Iniciar Sesion"> 
+
+            <p class="formContact-p">No tienes cuenta?, <a href="/register.html">Registrate aqui</a></p>
+            <p class="formContact-p"><a href="/index.html">Volver</a></p>            
+            
+        </form>
+    </section>
+    <script>
+        const getdata = async()=>{
+            try {
+                const response = await fetch("http://localhost:3000/userdata")
+                const data = await response.json()
+                if(data.islogged){
+                    window.location.pathname = "/index.html"
+                }
+                
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getdata()
+        document.querySelector('form').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const formObject = Object.fromEntries(formData.entries());
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formObject)
+                });
+
+                const result = await response.json();
+
+                if (result.isError) {
+                    document.getElementById('responseMessage').innerText = `${result.message}`;
+                } else{
+                    window.location.pathname = "/index.html"
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    </script>
+    <!-- <script src="/js/scriptLogin.js"></script> -->
+</body>
+
+</html>
